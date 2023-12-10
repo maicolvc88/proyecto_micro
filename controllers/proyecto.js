@@ -64,6 +64,8 @@ const createProyecto = async (req = request, res = response) => {
  * Consultar todos
  */
 const getProyectos = async (req, res = response) => {
+    var hoy = new Date(); 
+    console.log('Calling getProyectos'+ ' ' + hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds())
     try{
         const proyectosBD = await Proyecto.find()
         .populate({

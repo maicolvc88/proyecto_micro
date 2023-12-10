@@ -6,8 +6,29 @@ services:
     build: 
       context: .
     ports:
-      - "4002:4002"
+      - "4002"
     networks:
       - proyectos-app
+
+  proyectos-micros-2:
+    container_name: proyectos-micros-2
+    image: proyectos-micros:v1
+    ports:
+      - "4002"
+    networks:
+      - proyectos-app
+
+  loader-balancer:
+    container_name: loader-balancer
+    image: loader-balancer:v1
+    build: 
+      context: ./loader-balancer
+    ports:
+      - "4003:80"
+    networks:
+      - proyectos-app
+    enviroments:
+      - MONGO_URI=${MONGO_URI}
+      - PORT=4002
 networks:
   proyectos-app: 
